@@ -2,8 +2,12 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"path/filepath"
 )
 
 func main() {
@@ -14,20 +18,20 @@ func main() {
 	mux.Handle("/", middleware(handler()))
 
 	srv := &http.Server{
-		Addr: *httpAddr,
+		Addr:    *httpAddr,
 		Handler: mux,
 	}
 	log.Fatal(srv.ListenAndServe())
 }
 
 type User struct {
-	ID int64 `json:"id"`
+	ID       int64  `json:"id"`
 	Username string `json:"username"`
-	Email string `json:"email"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-type Session {
+type Session struct {
 	ID int64 `json:"id"`
 }
 
